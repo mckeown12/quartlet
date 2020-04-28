@@ -1,0 +1,23 @@
+.outercom{
+    float:right;
+}
+.outer-box{
+    border:1px;
+    border-style: solid;
+    border-color: black;
+    display: flex;
+    flex-direction: column;
+    width: 30vw;
+    position: absolute;
+    height: 80vh;
+}
+.textbox{
+    width: 90%;
+    height: 50%;
+}
+.form{
+    margin-top: auto;
+    border:1px;
+    border-style: solid;
+    border-color: black;
+}

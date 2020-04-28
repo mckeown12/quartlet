@@ -1,0 +1,16 @@
+{
+  "name": "quartet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "assets/bitcoin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "signalhub": "^4.9.0",
+    "simple-peer": "^9.4.0",
+    "webrtc-swarm": "^2.9.0"
+  }
+}

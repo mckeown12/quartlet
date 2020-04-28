@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Quartlet</title>
+    <!-- <script src="assets/peer.js"></script> -->
+    <script src="assets/modal.js"></script>
+    <script src="assets/card.js"></script>
+    <script src="assets/logic.js"></script>
+    <script src="assets/bundle.js"></script>
+
+    <!-- <script src="assets/modal2.js"></script> -->
+    
+    <link rel="stylesheet" href="assets/hamburgers.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+    <!-- <my-modal>
+        <span slot="title">Game Over!</span>
+        <span slot="content"> Congratulations to you! </span>
+    </my-modal> -->
+
+
+    <div id="gameSettings" class="gameSettings settingsHidden" style="align-items: center;">
+        <!-- settingsHidden -->
+
+        <button class="hamburger hamburger--3dx" id="hamburger" onclick="toggleSettings()">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+        <div class="settingsContent hidden">
+            <!-- hidden -->
+            <div style="width:250px; margin:auto; padding:0px;">
+                <h1 onclick="killState()">Play Quartlet!</h1>
+                <p>
+                    There are currently 
+                    <b><span id="numQuartets"></span></b>
+                    quartlets on the board! 
+                    Can you find one?
+                </p>
+                
+
+                <div id="playWithFriends1">
+                    <input type="text" id="userName" placeholder="Username" data-lpignore="true" oninput="enableButton()"></input>
+                    <input type="text" id="roomName" placeholder="Room_Name" data-lpignore="true" oninput="enableButton()" value="room"></input>
+                    <button class="btn" id="joinRoomButton" onclick="playWithFriends()" disabled>Play with Friends!</button>
+                </div>
+
+                <div id="playWithFriends2" class="hidden">
+                    <b>Waiting For:</b> <span id="playersNotReady"></span><br>
+                    <b>Players Ready:</b> <span id="playersReady"></span>
+                    <button class="btn" id="startGame" disabled onclick="imReady()">I'm Ready!</button>
+                </div>
+
+                <hr>
+                <button id="hint" onclick="hint()" class="btn">hint</button>
+            </div>
+        </div>
+
+        <!-- info is stuff that floats above the page 
+            next to the hamburger menu.
+        -->
+        <div id="info" class="row">
+            <button id="leaveGame" class="btn" onclick="killState();location.href=location.href;">
+                New Game
+            </button>
+            <div id="scores"></div>
+        </div>
+    </div>
+
+    <div id="table" class="table" class="shadow"></div>
+
+    <div id="console">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+    </div>
+
+    <script>
+        window.username = "localMe";
+        window.countedDown = true; // no countdown for single-player.
+        // window.sharedState = {
+        //     roomName: "C00L_R00M",
+        //     type: "state",              // message type is state and not newId
+        //     timestamp: 0,               // when was this state last updated.
+        //     gameStartTime: null,
+        //     gameEndTime: null,
+        //     peers: {
+        //         "jwleijf8": {
+        //             name: "James",
+        //             deck: [],
+        //             ready: false
+        //         },
+        //         "2o8fjo8j": {
+        //             name: "Jack",
+        //             deck: [],
+        //             ready: false
+        //         }
+        //     },
+        //     deck: [],                   // cards not on the table or in players' decks.
+        //     tableCards: []              // cards on the table
+        // };
+
+        function decrement(el){
+            el.innerHTML = Date.now();
+        }
+
+        document.body.onload = function(){
+            let table = document.querySelector("#table");
+            window.selectedCards = [];
+            window.myId = 'localMe';
+            
+            loadState();
+
+            for(let i=0; i<12; i++){
+                table.appendChild(createCard(0, "blue", "square"));
+            }
+
+
+            // try to rejoin a room you were previously in...
+            if(oldId in sharedState.peers 
+                && oldId != "localMe"
+                && sharedState.roomName != "C00L_R00M"){
+
+                // alert(sharedState.roomName);
+
+                let roomName = sharedState.roomName;
+                let username = sharedState.peers[oldId].name; 
+                console.log(`Trying to rejoin room "${roomName}" as "${username}"`);
+                rejoinRoom(roomName, username);
+            } else{
+                animateState();
+            }
+        
+        }
+
+    </script>
+
+</body>
+</html>

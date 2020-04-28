@@ -1,0 +1,115 @@
+.horizontal{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    height:100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.cardDiv{
+    border-radius: 4px;
+    box-shadow: 1px 1px 5px -1px rgb(50,50,50);
+    height:90%;
+    width:90%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin:auto;
+    transition: 0.2s all;
+    cursor:pointer;
+    background-color:white;
+}
+
+
+@media (orientation: landscape) and (min-aspect-ratio: 3/2) and (max-width: 1200px){
+    .cardDiv{
+        flex-direction: row;
+    }
+}
+
+@media (max-aspect-ratio: 2/1){
+    .cardDiv{
+        height: 70%;
+    }
+}
+
+@media (min-aspect-ratio: 1/2){
+    .cardDiv{
+        width: 70%;
+    }
+}
+
+.cardDiv:hover{
+    transform: translate(-3px,-3px);
+    box-shadow: 1px 1px 5px -1px black;
+}
+
+.cardDiv:active{
+    transform: translate(-1px,-1px);
+    box-shadow: 1px 1px 5px -2px black inset;
+
+}
+
+.selected{
+    box-shadow: 1px 1px 9px -4px black inset;
+    background-color:rgba(0,0,0,0.3);
+}
+
+.fourGlyphs{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+
+.shake{
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+
+.hint{
+    animation: hint 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes hint {
+    25%, 75% {
+        transform: scale(0.95);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}

@@ -1,0 +1,226 @@
+/* General Styles */
+
+*{
+    transition: 0.2s all;
+}
+
+body, html{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding: 0px;
+    font-family:Arial, Helvetica, sans-serif;
+    color:rgb(50,50,50);
+    overflow-x: hidden;
+}
+
+body{
+    /* perspective: 1000px; (breaks static positioning of modal...) */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background:url(/assets/wood.png);
+    background-size: 100% 100%;
+}
+
+.btn{
+    width: 100%;
+    height: 3em;
+    text-align: center;
+    padding: 2px;
+    border: 1px solid black;
+    box-shadow: 1px 1px 5px -1px black;
+    background:white;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.btn:active{
+    transform:scale(0.95);
+}
+
+.btn:disabled{
+    cursor: not-allowed;
+    box-shadow:none;
+    background-color:rgb(240,240,240);
+}
+
+
+input[type="text"]{
+    display: block;
+    box-sizing: border-box;
+    margin: 10px auto 10px auto;
+    padding: 5px;
+    border: 0px;
+    font-family: monospace;
+    width: 100%;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+/* Console */
+#console {
+    padding:10px;
+    background:rgba(255,255,255,0.7);
+    box-shadow: 0px 0px 5px -1px grey;
+    border-radius: 3px;
+    display: none;
+}
+
+#console > p {
+    padding: 5px;
+    width:100%;
+    min-width:40vw;
+    border: 1px solid black;
+}
+
+
+/* Settings / Hamburger interface */
+
+.gameSettings{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    transform: rotate3d(1,0,0, 0deg);
+    background:rgba(220,220,220,0.7);
+    box-shadow: 0px 0px 5px -1px grey;
+    padding: 15px;
+    margin: 10px auto auto 10px;
+    border-radius: 4px;
+}
+
+.settingsContent{
+    margin:auto;
+    padding:5px;
+    width:300px; /* if you change this, you must also change another div in index.html */
+}
+
+.hidden{
+    width:0px;
+    padding:0px;
+    margin:0px;
+    height:0px;
+    overflow: hidden;
+    opacity:0;
+}
+
+.settingsHidden{
+    margin: 10px 10px auto 10px
+}
+
+.hamburger{
+    padding: 0px;
+    text-align:left;
+}
+
+.hamburger:focus, .btn:focus{
+    outline:none;
+}
+
+
+.player_name, .score{
+    padding: 3px;
+    border-radius:7px;
+    background-color: rgba(255,255,255,0.7);
+    display: inline-block;
+    margin:3px;
+}
+
+#info{
+    margin:5px;
+}
+
+#info > *{
+    display:inline-block;
+    margin:0px;
+    padding:0px;
+}
+
+#leaveGame {
+    padding:5px;
+    margin:0px;
+}
+
+
+/* Cards and Table Styles */
+
+.table {
+    transform: rotate3d(1,0,0, 0.1deg);
+    border-radius: 3px;
+    box-shadow: 0px 0px 5px -1px grey;
+    padding: 30px;
+    width: 50%;
+    height: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    background:rgba(255,255,255,0.7);
+}
+
+
+/* .table::after{
+    content: "";
+    background: url(/assets/wood.webp);
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+    background-size: 100% 100%;
+  } */
+
+q-card{
+    display:flex;
+}
+
+
+/* Mobile Styles */
+
+@media (max-width: 1200px){
+    body{
+        display:block;
+    }
+
+    .gameSettings{
+        margin:auto auto auto auto;
+        margin-bottom:20px;
+    }
+
+    .table{
+        padding:3px;
+        width:95%;
+        height:80%;
+        margin-bottom:20px;
+    }
+
+    #console{
+        /* display:block; */
+        display:none;
+    }
+
+    /* tall screens */
+    @media (max-aspect-ratio: 2/3){
+        .table{
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            height: 70%;
+        }
+    }
+    
+    /* wide screens */
+    @media (min-aspect-ratio: 3/2){
+        .table{
+            height:89%;
+        }
+    }
+}
+
