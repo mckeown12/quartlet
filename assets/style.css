@@ -19,7 +19,7 @@ body{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background:url(assets/wood.png);
+    background:url(./wood.png);
     background-size: 100% 100%;
 }
 
