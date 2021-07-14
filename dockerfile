@@ -2,4 +2,4 @@
 
 FROM hypriot/rpi-node
 RUN npm install -g signalhub
-CMD "signalhub listen -p 3003"
+CMD signalhub listen -p 3003
