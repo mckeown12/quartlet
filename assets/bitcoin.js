@@ -7,16 +7,17 @@
 
 const signalhub = require("signalhub");
 const createSwarm = require("webrtc-swarm");
-window.Peer = require("simple-peer");
+// window.Peer = require("simple-peer");
 
+// const signalHubURLs = ['https://signalhub-jccqtwhdwc.now.sh']
+const signalHubURLs = ['https://signalhub.quartlet.com']
 
 
 window.joinRoom = function(roomName, myName){
     window.username = myName;
     window.countedDown = false;
 
-    // const hub = signalhub(`quartet_${roomName}`, ['https://signalhub-jccqtwhdwc.now.sh']);
-    const hub = signalhub(`quartet_${roomName}`, ['https://signalhub.quartlet.com'])
+    const hub = signalhub(`quartet_${roomName}`, signalHubURLs)
     window.swarm = createSwarm(hub)
     window.myId = swarm.me;
 
@@ -40,8 +41,7 @@ window.rejoinRoom = function(roomName, myName){
     let modal = window.createNewModal("","Please wait while we try to reconnect to your game!", {self_destruct_ms: 4000});
     document.body.appendChild(modal);
 
-    const hub = signalhub(`quartet_${roomName}`, ['https://signalhub-jccqtwhdwc.now.sh']);
-    // const hub = signalhub(`quartet_${roomName}`, ['http://192.168.0.115:8080'])
+    const hub = signalhub(`quartet_${roomName}`, signalHubURLs);
     window.swarm = createSwarm(hub)
     window.username = myName;
     window.myId = swarm.me;
