@@ -15,8 +15,8 @@ window.joinRoom = function(roomName, myName){
     window.username = myName;
     window.countedDown = false;
 
-    const hub = signalhub(`quartet_${roomName}`, ['https://signalhub-jccqtwhdwc.now.sh']);
-    // const hub = signalhub(`quartet_${roomName}`, ['http://192.168.0.115:8080'])
+    // const hub = signalhub(`quartet_${roomName}`, ['https://signalhub-jccqtwhdwc.now.sh']);
+    const hub = signalhub(`quartet_${roomName}`, ['https://signalhub.quartlet.com'])
     window.swarm = createSwarm(hub)
     window.myId = swarm.me;
 
