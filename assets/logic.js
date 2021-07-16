@@ -15,6 +15,8 @@ function choice(l){
 const f = (a, b) => flatten( a.map(d => b.map(e => flatten([d, e]))) );
 const cartesian = (...arrays) => arrays.reduce(f)
 
+// console.log plus appending to 
+// #console DOM element for mobile debugging
 function print(newMsg){
     let c = document.querySelector("#console");
     let oldMessages = Array.from(c.children);
@@ -62,7 +64,6 @@ function setDiff(A, B, comparator){
 function findCardInTable(card){
     let [n,c,s] = card;
     let selector = `q-card[number='${n}'][color='${c}'][shape='${s}']`
-    // console.log(selector)
     return document.querySelector(selector);
 }
 
@@ -102,7 +103,7 @@ function isQuartet(listOfCards){
     return bool;
 }
 
-
+// used in findQuartets to get all subsets of 4 cards
 function kTuplesOfN(k,n){
     if(k > n){
         return [];
@@ -437,6 +438,59 @@ function animateTableState(){
         checkGameOver();
     }, 300)
 }
+
+function formattedTimeSince(timestamp){
+    let dt = new Date() - timestamp;
+
+    let oneSecond = 1000;
+    let oneMinute = oneSecond * 60;
+
+    let minutes = `${Math.floor(dt / 60000)}`.padStart(2,'0');
+    let seconds = `${Math.floor(dt / 1000) % 60}`.padStart(2,'0');
+    
+    return `${minutes}:${seconds}`;
+}
+
+function timestampOfLatestQuartet(peer){
+    let latest = peer.deck.slice(-1)[0];
+    let timestamp = latest.slice(-1)[0];
+    return timestamp;  
+}
+
+function animateTimerState(){
+    let now = new Date()
+
+    if(sharedState.gameStartTime !== null){
+        let timeElapsed = formattedTimeSince(sharedState.gameStartTime);
+        let timeSinceLastQuartet = Infinity;
+        let timeSinceYourLastQuartet = Infinity;
+
+        let peers = Object.values(sharedState.peers);
+        if(peers.length){
+            let latestQuartetTimestamp = Math.max(...peers.filter(p => p.deck.length).map(timestampOfLatestQuartet));
+            if(latestQuartetTimestamp > 0)
+                timeSinceLastQuartet = formattedTimeSince(latestQuartetTimestamp);
+            if(sharedState.peers[myId].deck.length){
+                let yourLatestQuartetTimestamp = timestampOfLatestQuartet(sharedState.peers[myId]);
+                timeSinceYourLastQuartet = formattedTimeSince(yourLatestQuartetTimestamp);
+            }
+        }
+    
+        document.querySelector("#timingInfo").innerHTML = `
+        <table>
+            <tr><th>Time Since Game Start:</th><td>${timeElapsed}</td></tr>
+            <tr><th>Time Since Last Quartlet:</th><td>${timeSinceLastQuartet}</td></tr>
+            <tr><th>Time Since YOUR Last Quartlet:</th><td>${timeSinceYourLastQuartet}</td></tr>
+        </table>`;
+    }
+    else{
+        document.querySelector("#timingInfo").innerHTML = '';
+    }
+
+}
+
+setTimeout(animateTimerState, 100);
+setInterval(animateTimerState, 1000);
 
 function animateState(){
     animateReadyState();

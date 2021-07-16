@@ -20,6 +20,7 @@ function cardClicked(event){
                 
                 // update OUR deck
                 let quartet = selectedCards.map(c => stripCard(c));
+                quartet.push(new Date().valueOf());
                 sharedState.peers[myId].deck.push(quartet);
                 
                 // update THE deck and tableCards (state only)
@@ -81,7 +82,7 @@ class Card extends HTMLElement{
         let table = document.querySelector(".table");
         let cs = getComputedStyle(table);
         let [w,h] = [parseFloat(cs.width), parseFloat(cs.height)];
-        let size = ((w+h)/2) / 35 ;
+        let size = ((w+h)/2) / 35;
         size = Math.floor(size);
 
         let glyph = document.createElementNS('http://www.w3.org/2000/svg','svg');

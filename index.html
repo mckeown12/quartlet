@@ -63,6 +63,7 @@
             <button id="leaveGame" class="btn" onclick="killState();location.href=location.href;">
                 New Game
             </button>
+            <div id="timingInfo"></div>
             <div id="scores"></div>
         </div>
     </div>
@@ -118,13 +119,10 @@
                 table.appendChild(createCard(0, "blue", "square"));
             }
 
-
             // try to rejoin a room you were previously in...
             if(oldId in sharedState.peers 
                 && oldId != "localMe"
                 && sharedState.roomName != "C00L_R00M"){
-
-                // alert(sharedState.roomName);
 
                 let roomName = sharedState.roomName;
                 let username = sharedState.peers[oldId].name; 
@@ -133,9 +131,7 @@
             } else{
                 animateState();
             }
-        
         }
-
     </script>
 
 </body>
